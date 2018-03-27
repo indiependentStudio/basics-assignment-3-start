@@ -1,0 +1,44 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <ol>
+        <li>Add A button which says 'Display Details'</li>
+        <li>Add a paragraph with any content of your choice (e.g. 'Secret Password = tuna')</li>
+        <li>Toggle the displaying of that paragraph with the button created in the first step</li>
+        <li>Log all button clicks in an array and output that array below the secret paragraph (maybe log a timestamp or simply an incrementing number)</li>
+        <li>Starting at the 5th log item, give all future log items a blue background (via ngStyle) and white color (ngClass)</li>
+      </ol>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <hr>
+      <button class="btn btn-primary" (click)="toggleDetailsVisible()">Display Details</button>
+      <p [ngClass]="{ hidden: detailsHidden }" >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Respondeat totidem verbis. </p>
+      <br>
+
+      <h4>Button Clicks</h4>
+
+      <!-- My solution -->
+      <ul *ngFor="let click of buttonClickedCounters">
+        <li *ngIf="click < 5; else highlightedEntries">
+          {{ click }}
+        </li>
+        <ng-template #highlightedEntries>
+          <li
+            [ngStyle]="{ 'background-color': 'blue' }">
+            <span [ngClass]=" 'white-text' ">
+              {{ click }}</span>
+          </li>
+        </ng-template>
+      </ul>
+
+      <!-- Course solution -->
+      <div
+        *ngFor="let click of buttonClickedCounters"
+        [ngStyle]="{ backgroundColor: click >= 5 ? 'blue' : 'transparent' }"
+        [ngClass]="{ 'white-text': click >= 5 }"
+        >{{ click }}</div>
+    </div>
+  </div>
+</div>
